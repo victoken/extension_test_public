@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "跨頁面資料傳遞",
+  "icons": { "128": "colatour.png" },
+  "version": "1.0",
+  "permissions": ["scripting", "tabs", "activeTab", "storage"],
+  "host_permissions": [
+    "https://pg2.colatour.com.tw/*",
+    "https://localhost:44381/*",
+    "https://imigresen-online.imi.gov.my/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://localhost:44381/extension.aspx",
+        "https://pg2.colatour.com.tw/S10B_Tour/S10B021_GuideInformation.aspx"
+      ],
+      "js": ["content_internal.js"]
+    },
+    {
+      "matches": ["https://imigresen-online.imi.gov.my/*"],
+      "js": ["content_official.js"]
+    }
+  ]
+}
